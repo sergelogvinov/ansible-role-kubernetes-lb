@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/sergelogvinov/ansible-role-kubernetes-lb/compare/v0.2.0...v0.2.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* use source adress as listen ([09541ff](https://github.com/sergelogvinov/ansible-role-kubernetes-lb/commit/09541ff0c52d7d0eef1f0f9a05ea36d5e24c8bd2))
+
 ## [0.2.0](https://github.com/sergelogvinov/ansible-role-kubernetes-lb/compare/v0.1.0...v0.2.0) (2024-12-13)
 
 
