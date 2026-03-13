@@ -49,6 +49,24 @@ frontend stats
   {{ ln }}
 {% endfor %}
 
+{% for svc, cfg in haproxy_services.items() %}
+frontend {{ svc }}
+  bind {{ cfg.listen }} mss 1300
+  option clitcpka
+  use_backend {{ svc }}-backend
+
+backend {{ svc }}-backend
+  mode tcp
+  fullconn 512
+  balance roundrobin
+
+{% for ln in cfg.backend.splitlines() %}
+  {{ ln }}
+{% endfor %}
+
+{% endfor %}
+
+{% if haproxy_vhost_listen and haproxy_vhost_backend %}
 frontend contolplane
   bind {{ haproxy_vhost_listen }} mss 1300
   option clitcpka
@@ -84,3 +102,4 @@ backend contolplane-talos
   server {{ srv[1:3] | join(' ') | split(':') | first }}:50001 check source {{ haproxy_vhost_listen | split(':') | first }}
 {% endif %}
 {% endfor %}
+{% endif %}
